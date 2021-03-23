@@ -2,28 +2,42 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/getDiff.js",
+  "bin": {
+    "gendiff": "./bin/gendiff.js"
+  },
   "type": "module",
   "engines": {
     "node": ">=14"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "babel": "babel-node",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/maksim-do/frontend-project-lvl2.git"
   },
-  "author": "",
+  "author": "Maxim Dolzhenkov",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/maksim-do/frontend-project-lvl2/issues"
   },
   "homepage": "https://github.com/maksim-do/frontend-project-lvl2#readme",
+  "babel": {
+    "presets": [
+      "@babel/env"
+    ]
+  },
   "dependencies": {
-    "commander": "^7.1.0"
+    "commander": "^7.1.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.10",
+    "@babel/node": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
     "@jest/globals": "^26.6.2",
     "eslint": "^7.13.0",
     "eslint-config-airbnb-base": "^14.2.1",
