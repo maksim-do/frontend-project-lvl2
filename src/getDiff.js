@@ -1,16 +1,5 @@
-import fs from 'fs';
-import path from 'path';
 import _ from 'lodash';
-
-const getFilepathAbs = (filepath) => {
-  if (filepath[0] === '.' && (filepath[1] === '.' || filepath[1] === '/')) {
-    return path.resolve(process.cwd(), filepath);
-  }
-  return filepath;
-};
-
-const parseObjToArr = (operator, obj) => Object.keys(obj)
-  .map((el) => ({ oper: operator, prop: el, value: obj[el] }));
+import parse from './parsers.js';
 
 const compare = (arr1, arr2) => {
   const intersection = _
@@ -31,9 +20,6 @@ const getSentence = (arr) => {
 
 export default (filepatch1, filepatch2) => {
   if (!filepatch1 || !filepatch2) return 'Not attribut';
-  const obg1 = fs.readFileSync(getFilepathAbs(filepatch1), 'utf8');
-  const obg2 = fs.readFileSync(getFilepathAbs(filepatch2), 'utf8');
-
-  const a = compare(parseObjToArr('-', JSON.parse(obg1)), parseObjToArr('+', JSON.parse(obg2)));
-  return getSentence(a);
+  const difference = compare(parse('-', filepatch1), parse('+', filepatch2));
+  return getSentence(difference);
 };
